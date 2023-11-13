@@ -1,0 +1,9 @@
+transformers
+urllib3
+gradio
+numpy
+torch==2.1.0
+torchaudio==2.1.0
+torchdata==0.7.0
+openai
+audioread==.0.1
