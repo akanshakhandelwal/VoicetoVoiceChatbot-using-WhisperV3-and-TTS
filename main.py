@@ -146,42 +146,12 @@ def transcribe(audio):
 # Front end web app
 import gradio as gr
 with gr.Blocks() as demo:
-    # chatbot = gr.Chatbot()
-    # msg = gr.Textbox()
-    # msg = ''
+  
    
     
     chat_history = []
 
     
-    # def process_audio(audio, original_text):
-    #     global msg, chat_history
-        
-    #     text =  transcribe(audio)
-    #     msg = original_text + "\n" + text
-    #     response  = user(msg, chat_history)
-    #     chat_history.append(response)
-    #     speech_file_path = Path(__file__).parent / "speech.mp3"
-    #     client = OpenAI()
-    #     audioresponse = client.audio.speech.create(
-    #         model="tts-1",
-    #         voice="alloy",
-    #         input=response["answer"]
-    #     )
-
-    #     audioresponse.stream_to_file(speech_file_path)
-    #     # audio = AudioSegment.from_mp3(speech_file_path)
-    #     # play(audio)
-    #     # playsound(speech_file_path)
-    #     play_audio(speech_file_path)
-
-        
-
-#     gr.Interface(
-#     transcribe,
-#     gr.Audio(sources=["microphone"]),
-#     "text",
-# )
 
     def process_audio(original_text,audio,state):
         global chat_history
@@ -207,15 +177,11 @@ with gr.Blocks() as demo:
         )
 
         audioresponse.stream_to_file(speech_file_path)
-        # audio = AudioSegment.from_mp3(speech_file_path)
-        # play(audio)
-        # playsound(speech_file_path)
+
         play_audio(speech_file_path)
         updated_conversation = f"{conversation}\nUser: {user_message}\nBot: {response['answer']}"
         return updated_conversation,updated_conversation
-        # return user_message, state
 
-    
 
     gr.Interface(
     fn= process_audio,
@@ -230,32 +196,6 @@ with gr.Blocks() as demo:
     title="Voice Assistant",
     
 )
-
-    
-    # clear = gr.Button("Clear")
-    # def user(user_message, history):
-        # Get response from QA chain
-        # response = qa({"question": user_message, "chat_history": history})
-        # return response
-    #     speech_file_path = Path(__file__).parent / "speech.mp3"
-    #     client = OpenAI()
-    #     audioresponse = client.audio.speech.create(
-    #         model="tts-1",
-    #         voice="alloy",
-    #         input=response["answer"]
-    #     )
-
-    #     audioresponse.stream_to_file(speech_file_path)
-        
-    #     play_audio(speech_file_path)
-
-       
-    #     history.append((user_message, response["answer"]))
-    #     return gr.update(value=""), history
-    # msg.submit(user, [msg, chatbot], [msg, chatbot], queue=False)
-    # clear.click(lambda: None, None, chatbot, queue=False)
-
-
 
 
 demo.launch(debug=True)
